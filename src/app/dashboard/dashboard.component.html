@@ -1,0 +1,114 @@
+<!-- Patients & Doctors Stats Starts -->
+
+<div *ngIf="role==='ROLE_ADMIN'">
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <div class="card baseColor boxShadow">
+        <div class="m-2 ml-5 mr-5">
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3 text-center">
+              <img style="height: 70px;"
+                   src="data:image/png;base64,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">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9 fontSize25">
+              <i *ngIf="totalPatients" class="fa fa-users m-2"></i><a>{{totalPatients}}</a>
+            </div>
+            <div class="col-md-3 text-center">
+              <h4>Patients</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card baseColor boxShadow">
+        <div class="m-2 ml-5 mr-5">
+          <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3 text-center">
+              <img style="height: 70px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3gDRiA3aCzGESuMsrRUWZ7ztzdrm7NUKsTeOceHMS_gQRmSLh">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9 fontSize25">
+              <i *ngIf="totalDoctors" class="fa fa-users m-2"></i><a>{{totalDoctors}}</a>
+            </div>
+            <div class="col-md-3 text-center">
+              <h4>Doctors</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Patients & Doctors Stats Ends -->
+
+
+<!-- Table Controller Starts -->
+
+<nz-spin [nzSpinning]="isLoading" nzTip='Loading...' nzSize='large'>
+  <div>
+    <div class="row m-2 mt-5">
+      <div class="col-md-6 text-left">
+        <!--
+			  <a class="baseColor mr-3">Legends</a>
+			  <a><i class="fa fa-square ml-3 text-danger"></i> Severe</a>
+			  <a><i class="fa fa-square ml-3 text-warning"></i> Mild</a>
+			  <a><i class="fa fa-square ml-3 text-success"></i> Well</a>
+			  <nz-select class="ml-4" style="width: 200px;" nzPlaceHolder="Patient Sort" (ngModelChange)="patientSortSelectChange($event)">
+				<nz-option *ngFor="let p of patientSortSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+			  </nz-select>
+		-->
+      </div>
+      <div class="col-md-6 text-right">
+        <a class="mr-4">Date Range</a>
+        <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+      </div>
+    
+    </div>
+  </div>
+  
+  <!-- Table Controller Ends -->
+  
+  
+  <!-- Data Table Starts -->
+  
+  <div>
+    <div class="card boxShadow">
+      <table class="table table-borderless">
+        <thead style="background-color: #b6f3ff">
+        <tr>
+          <th></th>
+          <th scope="col">Patients</th>
+          <th scope="col">Patient Condition</th>
+          <th scope="col">Doctors</th>
+          <th scope="col">Clinic Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let patient of patients">
+          <td>
+            <button routerLink="/patients/patient-detail/{{patient.id}}" nz-button><i class="fa fa-eye "></i></button>
+          </td>
+          <td>{{patient.first_name}} {{patient.last_name}}</td>
+          <td>*** NOT PROVIDED</td>
+          <td>
+            <button routerLink="/doctors/doctor-detail/{{patient.doctor_id}}" nz-button><i class="fa fa-user-md mr-2"></i>Doctor Profile</button>
+          </td>
+          <td>*** NOT PROVIDED</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</nz-spin><!-- Data Table Ends -->
+
+
+
+
+

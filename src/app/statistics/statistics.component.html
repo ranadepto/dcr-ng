@@ -1,0 +1,48 @@
+<!-- Table Controller Starts -->
+
+<div>
+  <div class="row m-2 mt-5 text-center">
+    <div class="col-md-6 text-left">
+      <a>Graph Type</a>
+      <nz-select class="ml-4" style="width: 200px;" [(ngModel)]="graphTypeSelectData[0]" nzPlaceHolder="Graph Type" (ngModelChange)="graphTypeSelectChange($event)">
+        <nz-option *ngFor="let p of graphTypeSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+      </nz-select>
+    </div>
+    <div class="col-md-6 text-right">
+      <a class="mr-4">Date Range</a>
+      <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+    </div>
+  </div>
+  
+  <div class="row m-2 text-center">
+    <div class="col-md-4">
+      <a>Filter By Cancer</a>
+      <nz-select class="ml-4" style="width: 200px;" [(ngModel)]="filterByCancerSelectData[1]" nzPlaceHolder="Filter By Cancer" (ngModelChange)="filterByCancerSelectChange($event)">
+        <nz-option *ngFor="let p of filterByCancerSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+      </nz-select>
+    </div>
+    <div class="col-md-4">
+      <a>Filter By Patient</a>
+      <nz-select class="ml-4" style="width: 200px;" [(ngModel)]="filterByPatientSelectData[1]" nzPlaceHolder="Filter By Patient" (ngModelChange)="filterByPatientSelectChange($event)">
+        <nz-option *ngFor="let p of filterByPatientSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+      </nz-select>
+    </div>
+    <div class="col-md-4">
+      <a>Filter By Doctor</a>
+      <nz-select class="ml-4" style="width: 200px;" [(ngModel)]="filterByDoctorSelectData[1]" nzPlaceHolder="Filter By Doctor" (ngModelChange)="filterByDoctorSelectChange($event)">
+        <nz-option *ngFor="let p of filterByDoctorSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</div>
+
+<!-- Table Controller Ends -->
+
+
+<!-- Graph Starts -->
+<div>
+  <div class="bg-white" style="height: 300px;">
+    <h5 class="p-3" *ngIf="filterByCancerSelected">{{filterByCancerSelected}} Statistics</h5>
+  </div>
+</div>
+<!-- Graph Ends -->

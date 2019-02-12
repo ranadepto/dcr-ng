@@ -1,0 +1,56 @@
+<!-- Table Controller Starts -->
+
+<nz-spin [nzSpinning]="isLoading" nzTip='Loading...' nzSize='large'>
+  <div>
+    <div class="row m-2 mt-5">
+      <div class="col-md-6 text-left">
+        <!--
+			  <a class="baseColor mr-3">Legends</a>
+			  <a><i class="fa fa-square ml-3 text-danger"></i> Pending</a>
+			  <a><i class="fa fa-square ml-3 text-success"></i> Approved</a>
+			  <nz-select class="ml-4" style="width: 200px;" nzPlaceHolder="Doctors Sort" (ngModelChange)="doctorSortSelectChange($event)">
+				<nz-option *ngFor="let p of doctorSortSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+			  </nz-select>
+		-->
+      </div>
+      <div class="col-md-6 text-right">
+        <a class="mr-4">Date Range</a>
+        <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+      </div>
+    
+    </div>
+  </div>
+  
+  <!-- Table Controller Ends -->
+  
+  
+  <!-- Data Table Starts -->
+  
+  <div>
+    <div class="card boxShadow">
+      <table class="table table-borderless">
+        <thead style="background-color: #b6f3ff">
+        <tr>
+          <th></th>
+          <th scope="col">Doctors</th>
+          <th scope="col">ID</th>
+          <th scope="col">Patient Count</th>
+          <th scope="col">Speciality</th>
+          <th scope="col">Clinic Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let doctor of doctors">
+          <td><a routerLink="/doctors/doctor-detail/{{doctor.id}}"><i class="fa fa-eye baseColor"></i></a></td>
+          <td>{{doctor.first_name}} {{doctor.last_name}}</td>
+          <td><a routerLink="/doctors/doctor-detail/{{doctor.id}}">#{{doctor.id}}</a></td>
+          <td>*** UNKNOWN</td>
+          <td>*** UNKNOWN</td>
+          <td>{{doctor.hospital_name}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</nz-spin><!-- Data Table Ends -->
+

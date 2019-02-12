@@ -1,21 +1,105 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-md fixed-top baseBackgroundColor boxShadow mb-5" style="z-index: 1000;">
+  <a class="menu-folder-icon"> <i nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i> </a>
+  <div class="text-center pl-4 pr-5 titleDivider"><a _ngcontent-c0="" class="navbar-brand text-dark" href="">{{title}}</a></div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"><i class="fa fa-bars mt-1"></i> </span>
+  </button>
+  <div class="collapse navbar-collapse pl-2" id="navbarCollapse">
+    <div class="col-md-10">
+        <nz-input-group [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+          <input class="pl-5 p-3" type="text" nz-input placeholder="Search Doctors or Patients" [(ngModel)]="search">
+        </nz-input-group>
+        <ng-template #prefixTemplate><i nz-icon type="search"></i></ng-template>
+        <ng-template #suffixTemplate><i nz-icon type="close-circle" (click)="search=null" *ngIf="search"></i></ng-template>
+    </div>
+    <div class="col-md-2">
+      <div class="text-right mr-3">
+        <nz-dropdown>
+          <div nz-dropdown><img class="rounded-circle boxShadow mr-2" alt="Avatar" src="https://prescription-cmed.firebaseapp.com/assets/male.png" style="height: 40px"> <a>{{roleName|lowercase}} <i class="fa fa-angle-down pl-1"></i></a>
+          </div>
+          <ul nz-menu>
+            <li nz-menu-item (click)="profile()"><i class="fa fa-user mr-2"></i> Profile</li>
+            <li nz-menu-item (click)="createBasicMessage('Settings Is Not Available Yet!')"><i class="fa fa-cog mr-2"></i> Settings</li>
+            <li nz-menu-item (click)="logout()"><i class="fa fa-sign-out mr-2"></i> Logout</li>
+          </ul>
+        </nz-dropdown>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<router-outlet></router-outlet>
+
+<nz-layout>
+  <nz-sider *ngIf="isLoggedIn()" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate" class="mt-5 boxShadow">
+    <nz-affix [nzOffsetTop]="50">
+      <ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed" class="">
+        <li class="" nz-menu-item routerLink="dashboard"><span class="fontSize16 fontWeight500"><i class="fa fa-columns fa-lg"></i><i nz-icon></i><span class="nav-text">Dashboard</span></span></li>
+        <li class="" nz-menu-item routerLink="patients"><span class="fontSize16 fontWeight500"><i class="fa fa-bed fa-lg"></i><i nz-icon></i><span class="nav-text">Patients</span></span></li>
+        <li class="" *ngIf="role==='ROLE_ADMIN'" nz-menu-item routerLink="doctors"><span class="fontSize16 fontWeight500"><i class="fa fa-user-md fa-lg"></i><i nz-icon></i><span class="nav-text">Doctors</span></span></li>
+        <li class="" nz-menu-item routerLink="statistics"><span class="fontSize16 fontWeight500"><i class="fa fa-bar-chart fa-lg"></i><i nz-icon></i><span class="nav-text">Statistics</span></span></li>
+        <li class="" nz-menu-item routerLink="contents"><span class="fontSize16 fontWeight500"><i class="fa fa-newspaper-o fa-lg"></i><i nz-icon></i><span class="nav-text">Contents</span></span></li>
+<!--
+        <li nz-submenu>
+          <span title><i class="fa fa-users fa-lg"></i><i nz-icon></i><span class="nav-text">Team</span></span>
+          <ul>
+            <li nz-menu-item routerLink="">Team 1</li>
+            <li nz-menu-item routerLink="">Team 2</li>
+          </ul>
+        </li>
+-->
+        <li class="" nz-menu-item (click)="logout()"><span class="fontSize16 fontWeight500"><i class="fa fa-power-off fa-lg"></i><i nz-icon></i><span class="nav-text">Logout</span></span></li>
+        <div style="height: 100vh;" class=""></div>
+      </ul>
+    </nz-affix>
+  
+    <nz-back-top></nz-back-top>
+
+
+  </nz-sider>
+  <nz-layout>
+    <nz-content class="m-5">
+      
+      <!-- Loged In User Info Starts -->
+      
+      <div *ngIf="isLoggedIn()">
+        <div class="card baseColor boxShadow mt-5">
+          <div class="row m-2">
+            <div class="col-md-1">
+              <img class="rounded-circle boxShadow" alt="Avatar" src="https://prescription-cmed.firebaseapp.com/assets/male.png" style="height: 70px">
+            </div>
+            <div class="col-md-3 mt-2">
+              <div class="ml-1">
+                <div class="row">
+                  <h5>{{firstName}} {{lastName}}</h5>
+                </div>
+                <div class="row">
+                  <a>117430CH67</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mt-2">
+              <div class="row">
+                <a>Dhaka Cancer Society</a>
+              </div>
+              <div class="row mt-1">
+                <a>Road #4, Plot #40, Gabtoli, Dhaka</a>
+              </div>
+            </div>
+            <div class="col-md-2 text-right">
+              <button nz-button nzType="default"><i class='{{roleIcon}}'></i>{{roleName}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Loged In User Info Ends -->
+      
+      <router-outlet></router-outlet>
+    
+    </nz-content>
+    <nz-footer style="text-align: center;">CMED Health Ltd. ©2019</nz-footer>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i nz-icon type="up"></i>
+</ng-template>

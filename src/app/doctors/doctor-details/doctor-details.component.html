@@ -1,0 +1,49 @@
+
+<!-- Doctor Profile Starts -->
+
+<nz-spin [nzSpinning]="isLoading" nzTip='Loading...' nzSize='large'>
+<div *ngIf="doctorProfile" class="card boxShadow mt-3">
+  <div class="card-body">
+  
+    <div class="row">
+      <div class="col-md-1 mr-2">
+        <img class="rounded-circle boxShadow" alt="Avatar" src="https://prescription-cmed.firebaseapp.com/assets/male.png" style="height: 75px">
+      </div>
+      <div class="col-md-3 mr-2">
+        <h5 class="baseColor p-2">{{doctorProfile.first_name}} {{doctorProfile.last_name}}</h5>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>AGE</a></div><div class="col-md-12 text-right baseColor"><a>{{age}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>GENDER</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.gender}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PATIENTS</a></div><div class="col-md-12 text-right baseColor"><a>*** UNKNOWN</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>MALE PATIENTS</a></div><div class="col-md-12 text-right baseColor"><a>*** UNKNOWN</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>FEMALE PATIENTS</a></div><div class="col-md-12 text-right baseColor"><a>*** UNKNOWN</a></div></div>
+        <div *ngIf="qualifications.length>0" class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DOCTORS QUALIFICATION</a></div>
+          <div *ngFor="let qualification of qualifications" class="col-md-12 text-right baseColor"><a>{{qualification.name}}</a></div>
+        </div>
+    
+      </div>
+      <div class="col-md-7 mr-2">
+        <div class="row p-2">
+          <div class="col-md-7 text-left"><h5 class="baseColor">OFFICIAL INFO</h5></div>
+          <div class="col-md-5 text-info">
+            <button *ngIf="doctorProfile.is_approved_by_admin" nz-button nzBlock nzType="default">APPROVED</button>
+            <button *ngIf="!doctorProfile.is_approved_by_admin" nz-button nzBlock nzType="default">REQUEST APPROVAL</button>
+          </div>
+        </div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PHONE</a></div><div class="col-md-12 text-right baseColor"><a href="tel:{{doctorProfile.phone}}">{{doctorProfile.phone}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>EMAIL</a></div><div class="col-md-12 text-right baseColor"><a href="mailto:{{doctorProfile.email}}">{{doctorProfile.email}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>CLINIC NAME</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.hospital_name}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>CLINIC ADDRESS</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.hospital_address}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>BMDC</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.bmdc_no}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>NID</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.nid}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DCR-ID</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.cancer_society_reg_no}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DISTRICT</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.district.name}}</a></div></div>
+        <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DIVISION</a></div><div class="col-md-12 text-right baseColor"><a>{{doctorProfile.division.name}}</a></div></div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+</nz-spin>
+
+<!-- Doctor Profile Ends -->
+

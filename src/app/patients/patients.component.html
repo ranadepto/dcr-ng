@@ -1,0 +1,61 @@
+<!-- Table Controller Starts -->
+
+<nz-spin [nzSpinning]="isLoading" nzTip='Loading...' nzSize='large'>
+  <div>
+    <div class="row m-2 mt-5">
+      <div class="col-md-2 text-right">
+        <button *ngIf="role==='ROLE_DOCTOR'" routerLink="add-patient" nz-button nzBlock nzType="primary"><i class="fa fa-plus mr-2"></i> New Patient</button>
+      </div>
+      <div class="col-md-4 text-left">
+<!--
+        <a>Patients Sort</a>
+        <nz-select class="ml-4" style="width: 200px;" nzPlaceHolder="Patients Sort" (ngModelChange)="patientSortSelectChange($event)">
+          <nz-option *ngFor="let p of patientSortSelectData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+-->
+      </div>
+      <div class="col-md-6 text-right">
+        <a class="mr-4">Date Range</a>
+        <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+      </div>
+    
+    </div>
+  </div>
+  
+  <!-- Table Controller Ends -->
+  
+  
+  <!-- Data Table Starts -->
+  
+  <div>
+    <div class="card boxShadow">
+      <table class="table table-borderless">
+        <thead style="background-color: #b6f3ff">
+        <tr>
+          <th></th>
+          <th scope="col">Patients</th>
+          <th scope="col">Patient Condition</th>
+          <th scope="col">Doctors</th>
+          <th scope="col">Clinic Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let patient of patients">
+          <td>
+            <button routerLink="/patients/patient-detail/{{patient.id}}" nz-button><i class="fa fa-eye "></i></button>
+          </td>
+          <td>{{patient.first_name}} {{patient.last_name}}</td>
+          <td>*** NOT PROVIDED</td>
+          <td>
+            <button routerLink="/doctors/doctor-detail/{{patient.doctor_id}}" nz-button><i class="fa fa-user-md mr-2"></i>Doctor Profile</button>
+          </td>
+          <td>*** NOT PROVIDED</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</nz-spin>
+
+  <!-- Data Table Ends -->
+

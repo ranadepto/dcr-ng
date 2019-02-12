@@ -1,0 +1,113 @@
+
+<!-- Patient Details Starts -->
+
+<form nz-form [formGroup]="addPatientForm" (ngSubmit)="patientFormSubmit()">
+<div class="card boxShadow mt-3">
+  <div class="card-body">
+    <nz-tabset>
+      
+      <!-- Patient Profile Starts -->
+      
+      <nz-tab nzTitle="Profile">
+        <div class="row mt-5">
+          <div class="col-md-1 mr-2">
+            <img class="rounded-circle boxShadow" alt="Avatar" src="https://prescription-cmed.firebaseapp.com/assets/male.png" style="height: 75px">
+          </div>
+          <div class="col-md-3 mr-2">
+            <div class="row bg-light" style="margin-bottom: 8px; margin-top: 32px;"><div class="col-md-12 text-left font-weight-bold baseColor mt-3"><a style="font-size: 20px;">PATIENT NAME</a></div><div class="col-md-12 text-right m-2 baseColor"><input class="baseColor font-weight-bold" nz-input formControlName="first_name" placeholder="First Name" nzSize="large"><input class="baseColor font-weight-bold mt-1" nz-input formControlName="last_name" placeholder="Last Name" nzSize="large"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PHONE</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input placeholder="Phone" formControlName="phone"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>GENDER</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="gender" nzSize="default"><nz-option *ngFor="let option of listOfOptionGender" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>BLOOD GROUP</a></div><div class="col-md-12 text-right m-2 text-danger"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="blood_group" nzSize="default"><nz-option *ngFor="let option of listOfOptionBloodGroup" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>RELIGION</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="religion" nzSize="default"><nz-option *ngFor="let option of listOfOptionReligion" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>FATHER/SPOUSE</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input placeholder="Guardian Name" formControlName="guardian_name"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>TOBACCO</a></div><div class="col-md-12 text-right m-13-5 baseColor"><nz-radio-group formControlName="is_use_tobacco"><label nz-radio nzValue="Yes">Yes</label><label nz-radio nzValue="No">No</label></nz-radio-group></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>SMOKING</a></div><div class="col-md-12 text-right m-13-5 baseColor"><nz-radio-group formControlName="is_smoking"><label nz-radio nzValue="Yes">Yes</label><label nz-radio nzValue="No">No</label></nz-radio-group></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>NON-SMOKING</a></div><div class="col-md-12 text-right m-13-5 baseColor"><nz-radio-group formControlName="is_non_smoking"><label nz-radio nzValue="Yes">Yes</label><label nz-radio nzValue="No">No</label></nz-radio-group></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DURATION</a></div><div class="col-md-6 text-right mb-2 mt-2 baseColor"><input type="number" placeholder="Year" nz-input formControlName="duration_year"></div><div class="col-md-6 text-right mb-2 mt-2 baseColor"><input nz-input type="number" placeholder="Month" formControlName="duration_month"></div></div>
+          </div>
+          
+          <div class="col-md-4 mr-2">
+            <h5 class="baseColor text-center">CANCER INFO</h5>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>ORGAN</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="organ" (ngModelChange)="onOrganChange($event)" nzSize="default"><nz-option *ngFor="let option of listOfOptionOrgan" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>TYPE</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="cancer_type" (ngModelChange)="onCancerTypeChange($event)" nzSize="default"><nz-option *ngFor="let option of listOfOptionType" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>SUBTYPE</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="cancer_subtype" nzSize="default"><nz-option *ngFor="let option of listOfOptionSubtype" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>T</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="t" (ngModelChange)="onTNMChange()" nzSize="default"><nz-option *ngFor="let option of listOfOptionT" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>N</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="n" (ngModelChange)="onTNMChange()" nzSize="default"><nz-option *ngFor="let option of listOfOptionN" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>M</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="m" (ngModelChange)="onTNMChange()" nzSize="default"><nz-option *ngFor="let option of listOfOptionM" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>STAGE</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input disabled formControlName="cancer_stage" [(ngModel)]="selectedStage" nzSize="default"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>HISTOPATHOLOGICAL TYPE</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="histopathological" nzSize="default"><nz-option *ngFor="let option of listOfOptionHisType" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>TUMOR CLASSIFICATION</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="tumor_classification" nzSize="default"><nz-option *ngFor="let option of listOfOptionTumorClassification" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>GRADING</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="tumor_grade" nzSize="default"><nz-option *ngFor="let option of listOfOptionGrading" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PATHOLOGICAL NODE</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="pathological" nzSize="default"><nz-option *ngFor="let option of listOfOptionPathNode" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+          </div>
+          
+          <div class="col-md-3">
+            <h5 class="baseColor text-center">OTHERS</h5>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>EMERGENCY CONTACT</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input placeholder="Emergency Contact" formControlName="emergency_phone"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DIVISION</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="division" (ngModelChange)="onDivisionChange($event)" nzSize="default"><nz-option *ngFor="let option of listOfOptionDivision" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DISTRICT</a></div><div class="col-md-12 text-right m-2 baseColor"><nz-select nzShowSearch nzAllowClear style="width: 100%;" formControlName="district" nzSize="default"><nz-option *ngFor="let option of listOfOptionDistrict" [nzLabel]="option.label" [nzValue]="option.value"></nz-option></nz-select></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PRESENT ADDRESS</a></div><div class="col-md-12 text-right m-2 baseColor"><textarea nz-input placeholder="Present Address" formControlName="present_address" nzAutosize></textarea></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>PERMANENT ADDRESS</a></div><div class="col-md-12 text-right m-2 baseColor"> <textarea nz-input placeholder="Permanent Address" formControlName="permanent_address" nzAutosize></textarea></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>EMAIL</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input type="email" placeholder="Email" formControlName="email"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>NID</a></div><div class="col-md-12 text-right m-2 baseColor"><input nz-input placeholder="NID" formControlName="nid"></div></div>
+            <div class="row mb-2 bg-light"><div class="col-md-12 text-left"><a>DATE OF BIRTH</a></div><div class="col-md-12 text-right m-2 baseColor"> <nz-date-picker formControlName="date_of_birth" (ngModelChange)="onDobChange($event)"></nz-date-picker></div></div>
+          </div>
+          
+        </div>
+      </nz-tab>
+      
+      <!-- Patient Profile Ends -->
+      
+      
+      <!-- Patient Treatment Info Starts -->
+      
+      <nz-tab nzTitle="Treatment Info">
+        <div class="row">
+          <div class="">
+            <div class="m-3">
+              <h5 class="mt-2">UPLOAD PRESCRIPTIONS</h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="clearfix">
+                    <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card" [(nzFileList)]="uploaded_images" [nzShowButton]="uploaded_images.length < 3" [nzPreview]="handlePreview">
+                      <i nz-icon type="plus"></i>
+                      <div class="ant-upload-text">Upload</div>
+                    </nz-upload>
+                    <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+                      <ng-template #modalContent>
+                        <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }"/>
+                      </ng-template>
+                    </nz-modal>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <h5 class="mt-2">FIRST LINE RECOMMENDATIONS</h5>
+            <textarea rows="4" nz-input formControlName="first_treatment_recommend"></textarea>
+          </div>
+          <div class="col-md-6">
+            <h5 class="mt-2">MORE RECOMMENDATIONS</h5>
+            <div class="col-md-6">
+              <nz-checkbox-group formControlName="moreRecommendationOptions" (ngModelChange)="createBasicMessage(moreRecommendationOptions.toString())"></nz-checkbox-group>
+            </div>
+
+            <button nz-button nzType="primary" [disabled]="!addPatientForm.valid"><i class="anticon anticon-save"></i>Save</button>
+
+          </div>
+        </div>
+      </nz-tab>
+      
+      <!-- Patient Treatment Info Ends -->
+    
+    </nz-tabset>
+  </div>
+</div>
+</form>
+
+<!-- Patient Details Ends -->
+
